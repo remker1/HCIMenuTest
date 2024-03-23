@@ -5,10 +5,14 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RadicalMenuTest extends Application {
 
     RadialMenu radialMenu;
+    List<String> names = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -26,8 +30,10 @@ public class RadicalMenuTest extends Application {
         thirdContainer.setText("Submenu 3");
         RadialMenuItem fourthItem = new RadialMenuItem();
         fourthItem.setText("Item 4");
+        names.add(fourthItem.getText());
         RadialMenuItem fifthItem = new RadialMenuItem();
         fifthItem.setText("Item 5");
+        names.add(fifthItem.getText());
 
         RadialMenuItem firstContainerSecondStage = new RadialMenuItem();
         firstContainerSecondStage.setText("Item 11");
@@ -41,6 +47,9 @@ public class RadicalMenuTest extends Application {
         firstContainer.addItem(firstContainerSecondStage2);
         firstContainer.addItem(firstContainerSecondStage3);
         firstContainer.addItem(firstContainerSecondStage4);
+        for (RadialMenuItem item : firstContainer.getItems()){
+            names.add(item.getText());
+        }
 
         RadialMenuItem secondContainerSecondStage = new RadialMenuItem();
         secondContainerSecondStage.setText("Item 21");
@@ -54,6 +63,9 @@ public class RadicalMenuTest extends Application {
         secondContainer.addItem(secondContainerSecondStage2);
         secondContainer.addItem(secondContainerSecondStage3);
         secondContainer.addItem(secondContainerSecondStage4);
+        for (RadialMenuItem item : secondContainer.getItems()){
+            names.add(item.getText());
+        }
 
         RadialMenuItem thirdContainerSecondStage = new RadialMenuItem();
         thirdContainerSecondStage.setText("Item 31");
@@ -67,6 +79,9 @@ public class RadicalMenuTest extends Application {
         thirdContainer.addItem(thirdContainerSecondStage2);
         thirdContainer.addItem(thirdContainerSecondStage3);
         thirdContainer.addItem(thirdContainerSecondStage4);
+        for (RadialMenuItem item : thirdContainer.getItems()){
+            names.add(item.getText());
+        }
 
         radialMenu.addRootItem(firstContainer);
         radialMenu.addRootItem(secondContainer);
@@ -95,32 +110,36 @@ public class RadicalMenuTest extends Application {
         // Add event handlers to all RadialMenuItem objects
         for (RadialMenuItem item : radialMenu.getAllItems()) {
             item.setOnMouseClicked(event -> {
-                if ("Item".equals(item.getText())) {
+                if (names.contains(item.getText())) {
+                    System.out.println(item.getText());
                     radialMenu.setVisible(false); // Hide the menu
                 }
             });
         }
         for (RadialMenuItem item : firstContainer.getItems()) {
             item.setOnMouseClicked(event -> {
-                if ("Item".equals(item.getText())) {
-                    radialMenu.setVisible(false);// Hide the menu
-                    firstContainer.setChildrenVisible(false);
+                if (names.contains(item.getText())) {
+                    System.out.println(item.getText());
+                    radialMenu.setVisible(false); // Hide the menu
+                    firstContainer.setChildrenVisible(false); // Hide the submenu
                 }
             });
         }
         for (RadialMenuItem item : secondContainer.getItems()) {
             item.setOnMouseClicked(event -> {
-                if ("Item".equals(item.getText())) {
+                if (names.contains(item.getText())) {
+                    System.out.println(item.getText());
                     radialMenu.setVisible(false); // Hide the menu
-                    secondContainer.setChildrenVisible(false);
+                    secondContainer.setChildrenVisible(false); // Hide the submenu
                 }
             });
         }
         for (RadialMenuItem item : thirdContainer.getItems()) {
             item.setOnMouseClicked(event -> {
-                if ("Item".equals(item.getText())) {
+                if (names.contains(item.getText())) {
+                    System.out.println(item.getText());
                     radialMenu.setVisible(false); // Hide the menu
-                    thirdContainer.setChildrenVisible(false);
+                    thirdContainer.setChildrenVisible(false); // Hide the submenu
                 }
             });
         }

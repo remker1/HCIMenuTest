@@ -65,6 +65,24 @@ public class TestContextMenu extends Application {
                 fifthItem
         );
 
+        // Add event handlers to print out the clicked item
+        firstContainerSecondStage.setOnAction(event -> System.out.println(firstContainerSecondStage.getText()));
+        firstContainerSecondStage2.setOnAction(event -> System.out.println(firstContainerSecondStage2.getText()));
+        firstContainerSecondStage3.setOnAction(event -> System.out.println(firstContainerSecondStage3.getText()));
+        firstContainerSecondStage4.setOnAction(event -> System.out.println(firstContainerSecondStage4.getText()));
+
+        secondContainerSecondStage.setOnAction(event -> System.out.println(secondContainerSecondStage.getText()));
+        secondContainerSecondStage2.setOnAction(event -> System.out.println(secondContainerSecondStage2.getText()));
+        secondContainerSecondStage3.setOnAction(event -> System.out.println(secondContainerSecondStage3.getText()));
+        secondContainerSecondStage4.setOnAction(event -> System.out.println(secondContainerSecondStage4.getText()));
+
+        thirdContainerSecondStage.setOnAction(event -> System.out.println(thirdContainerSecondStage.getText()));
+        thirdContainerSecondStage2.setOnAction(event -> System.out.println(thirdContainerSecondStage2.getText()));
+        thirdContainerSecondStage3.setOnAction(event -> System.out.println(thirdContainerSecondStage3.getText()));
+        thirdContainerSecondStage4.setOnAction(event -> System.out.println(thirdContainerSecondStage4.getText()));
+
+        forthItem.setOnAction(event -> System.out.println(forthItem.getText()));
+        fifthItem.setOnAction(event -> System.out.println(fifthItem.getText()));
 
         // Add event handler to show context menu on right-click
         root.setOnMouseClicked(event -> {
