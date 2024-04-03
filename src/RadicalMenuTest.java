@@ -17,7 +17,7 @@ public class RadicalMenuTest extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        radialMenu = new RadialMenu(60, 120, 360, 5);
+        radialMenu = new RadialMenu(50, 100, 360, 5);
 
 
         RadialMenuContainer firstContainer = new RadialMenuContainer();

@@ -13,76 +13,77 @@ public class TestContextMenu extends Application {
     public void start(Stage primaryStage) {
         Pane root = new Pane();
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
-
+        scene.getStylesheets().add(getClass().getResource("linearmenu.css").toExternalForm());
         // Create the main context menu
         ContextMenu contextMenu = new ContextMenu();
 
+        String[] firstContainer = new String[]{"Apple", "Apricot", "Avocado", "Asparagus", "Artichoke"};
+        String[] secondContainer = new String[]{"Banana", "Blueberry", "Beetroot", "Broccoli", "Bean-Sprouts"};
+        String[] thirdContainer = new String[]{"Cherry", "Carrot", "Cantaloupe", "Cauliflower", "Cucumber"};
+        String menuName1 = "A words";
+        String menuName2 = "B words";
+        String menuName3 = "C words";
+        String forthItem = "Durian";
+        String fifthItem = "Edamame";
+
         // Create submenus
-        Menu firstContainer = new Menu("Submenu 1");
-        Menu secondContainer = new Menu("Submenu 2");
-        Menu thirdContainer = new Menu("Submenu 3");
-        MenuItem forthItem = new MenuItem("Item 4");
-        MenuItem fifthItem = new MenuItem("Item 5");
+        Menu linearFirstContainer = new Menu(menuName1);
+        Menu linearSecondContainer = new Menu(menuName2);
+        Menu linearThirdContainer = new Menu(menuName3);
+        MenuItem linearForthItem = new MenuItem(forthItem);
+        MenuItem linearFifthItem = new MenuItem(fifthItem);
 
-        MenuItem firstContainerSecondStage = new MenuItem("Item 11");
-        MenuItem firstContainerSecondStage2 = new MenuItem("Item 12");
-        MenuItem firstContainerSecondStage3 = new MenuItem("Item 13");
-        MenuItem firstContainerSecondStage4 = new MenuItem("Item 14");
-        firstContainer.getItems().addAll(
-                firstContainerSecondStage,
-                firstContainerSecondStage2,
-                firstContainerSecondStage3,
-                firstContainerSecondStage4
-        );
+        for (String item : firstContainer) {
 
-        MenuItem secondContainerSecondStage = new MenuItem("Item 21");
-        MenuItem secondContainerSecondStage2 = new MenuItem("Item 22");
-        MenuItem secondContainerSecondStage3 = new MenuItem("Item 23");
-        MenuItem secondContainerSecondStage4 = new MenuItem("Item 24");
-        secondContainer.getItems().addAll(
-                secondContainerSecondStage,
-                secondContainerSecondStage2,
-                secondContainerSecondStage3,
-                secondContainerSecondStage4
-        );
+            linearFirstContainer = linearAddItem(item, linearFirstContainer);
 
-        MenuItem thirdContainerSecondStage = new MenuItem("Item 31");
-        MenuItem thirdContainerSecondStage2 = new MenuItem("Item 32");
-        MenuItem thirdContainerSecondStage3 = new MenuItem("Item 33");
-        MenuItem thirdContainerSecondStage4 = new MenuItem("Item 34");
-        thirdContainer.getItems().addAll(
-                thirdContainerSecondStage,
-                thirdContainerSecondStage2,
-                thirdContainerSecondStage3,
-                thirdContainerSecondStage4
-        );
+        }
+
+        for (String item : secondContainer) {
+
+            linearSecondContainer = linearAddItem(item,linearSecondContainer);
+
+        }
+
+        for (String item : thirdContainer) {
+
+            linearThirdContainer = linearAddItem(item,linearThirdContainer);
+        }
+
 
         contextMenu.getItems().addAll(
-                firstContainer,
-                secondContainer,
-                thirdContainer,
-                forthItem,
-                fifthItem
+                linearFirstContainer,
+                linearSecondContainer,
+                linearThirdContainer,
+                linearForthItem,
+                linearFifthItem
         );
 
-        // Add event handlers to print out the clicked item
-        firstContainerSecondStage.setOnAction(event -> System.out.println(firstContainerSecondStage.getText()));
-        firstContainerSecondStage2.setOnAction(event -> System.out.println(firstContainerSecondStage2.getText()));
-        firstContainerSecondStage3.setOnAction(event -> System.out.println(firstContainerSecondStage3.getText()));
-        firstContainerSecondStage4.setOnAction(event -> System.out.println(firstContainerSecondStage4.getText()));
+        // TODO: Add event handlers to print out the clicked item
+        linearFirstContainer.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            System.out.println("Clicked: " + menuItem.getText());
+        });
 
-        secondContainerSecondStage.setOnAction(event -> System.out.println(secondContainerSecondStage.getText()));
-        secondContainerSecondStage2.setOnAction(event -> System.out.println(secondContainerSecondStage2.getText()));
-        secondContainerSecondStage3.setOnAction(event -> System.out.println(secondContainerSecondStage3.getText()));
-        secondContainerSecondStage4.setOnAction(event -> System.out.println(secondContainerSecondStage4.getText()));
+        linearSecondContainer.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            System.out.println("Clicked: " + menuItem.getText());
+        });
 
-        thirdContainerSecondStage.setOnAction(event -> System.out.println(thirdContainerSecondStage.getText()));
-        thirdContainerSecondStage2.setOnAction(event -> System.out.println(thirdContainerSecondStage2.getText()));
-        thirdContainerSecondStage3.setOnAction(event -> System.out.println(thirdContainerSecondStage3.getText()));
-        thirdContainerSecondStage4.setOnAction(event -> System.out.println(thirdContainerSecondStage4.getText()));
+        linearThirdContainer.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            System.out.println("Clicked: " + menuItem.getText());
+        });
 
-        forthItem.setOnAction(event -> System.out.println(forthItem.getText()));
-        fifthItem.setOnAction(event -> System.out.println(fifthItem.getText()));
+        linearForthItem.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            System.out.println("Clicked: " + menuItem.getText());
+        });
+
+        linearFifthItem.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            System.out.println("Clicked: " + menuItem.getText());
+        });
 
         // Add event handler to show context menu on right-click
         root.setOnMouseClicked(event -> {
@@ -94,6 +95,13 @@ public class TestContextMenu extends Application {
         primaryStage.setTitle("Linear Menu with Submenus Example");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public Menu linearAddItem(String item, Menu container){
+        MenuItem linearItem = new MenuItem();
+        linearItem.setText(item);
+        container.getItems().add(linearItem);
+        return container;
     }
 
     public static void main(String[] args) {
