@@ -7,6 +7,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -17,6 +20,7 @@ public class RadicalMenuTest extends Application {
     String target;
     private  final Label radialLabel = new Label("Radial Menu Testing\nWe are looking for:");
     BeforeBlock beforeBlock;
+    String resultLine;
 
 
 
@@ -95,7 +99,9 @@ public class RadicalMenuTest extends Application {
                         if (selectedItemText.equals(target)) {
                             endTime.set(System.currentTimeMillis());
                             duration.set((endTime.get() - startTime));
-                            System.out.println("RadialMenu,"+ beforeBlock.getTrailRadialNumber() + ',' + target + "," + duration);
+                            resultLine = "RadialMenu,"+ beforeBlock.getTrailRadialNumber() + ',' + target + "," + duration;
+                            appendToFile(beforeBlock.getFilePath(),resultLine );
+                            System.out.println(resultLine);
                             radialMenu.setVisible(false);
                             beforeBlock.trailRadialNumber += 1;
                             if ((beforeBlock.getTrailRadialNumber() >= beforeBlock.getMaxTrailNum())&&
@@ -115,7 +121,9 @@ public class RadicalMenuTest extends Application {
                     if (selectedItemText.equals(target)) {
                         endTime.set(System.currentTimeMillis());
                         duration.set((endTime.get() - startTime));
-                        System.out.println("RadialMenu," + beforeBlock.getTrailRadialNumber() + ',' + target + "," + duration);
+                        resultLine = "RadialMenu,"+ beforeBlock.getTrailRadialNumber() + ',' + target + "," + duration;
+                        appendToFile(beforeBlock.getFilePath(),resultLine );
+                        System.out.println(resultLine);
                         radialMenu.setVisible(false);
                         beforeBlock.trailRadialNumber += 1;
                         if ((beforeBlock.getTrailRadialNumber() >= beforeBlock.getMaxTrailNum())&&
@@ -177,6 +185,15 @@ public class RadicalMenuTest extends Application {
         radialItem.setText(item);
         container.addItem(radialItem);
         return container;
+    }
+
+    public static void appendToFile(String filePath, String textToAppend) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(textToAppend);
+            writer.newLine(); // Add newline after each appended string
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

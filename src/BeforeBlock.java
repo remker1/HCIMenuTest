@@ -22,6 +22,7 @@ public class BeforeBlock extends Application {
     String menuName3 = "C words";
     String forthItem = "Durian";
     String fifthItem = "Edamame";
+    String filePath = "result.txt";
 
     private final Label beforeBlockLabel = new Label("Prepare yourself..." +
             "Timer will Start as soon as you press one of the keys\n" +
@@ -123,6 +124,9 @@ public class BeforeBlock extends Application {
     }
     public String getFifthItem(){
         return fifthItem;
+    }
+    public String getFilePath(){
+        return filePath;
     }
 
 
