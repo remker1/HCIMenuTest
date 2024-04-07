@@ -1,23 +1,27 @@
-#radialItem {
+.context-menu {
+    -fx-font-size: 14px; /* Change font size */
+}
+
+.menu-item {
+    -fx-pref-height: 50px;
     -fx-fill: linear-gradient(whitesmoke, antiquewhite);
     -fx-stroke: #120D43;
     -fx-stroke-width: 2;
 }
 
-#radialItem:pressed {
+.menu-item:pressed {
     -fx-fill: linear-gradient(dodgerblue, lightskyblue);
     -fx-stroke: #120D43;
     -fx-stroke-width: 2;
 }
 
-#radialItem:selected {
+.menu-item:selected {
     -fx-fill: linear-gradient(dodgerblue, lightskyblue);
     -fx-stroke: red;
     -fx-stroke-width: 2;
 }
 
-#radialItem:hover {
-    -fx-fill: linear-gradient(lightgrey, lightgrey);
-    -fx-stroke: white;
-    -fx-stroke-width: 2;
+.menu-item:hover {
+    -fx-background-color: linear-gradient(lightgray, lightgray); /* Change background color on hover */
 }
+
