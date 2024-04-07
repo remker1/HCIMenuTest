@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,15 +22,18 @@ public class ContextMenuTest extends Application {
 
     BeforeBlock beforeBlock;
     String target;
+    String resultLine;
     private  final Label linearLabel = new Label("Linear Menu Testing\nWe are looking for:");
 
     @Override
     public void start(Stage primaryStage) {
+
         Pane root = new Pane();
         VBox vBox = new VBox();
         target = randomItemGenerator();
         Label targetLabel = new Label(target);
         long startTime;
+
         AtomicLong endTime = new AtomicLong();
         AtomicLong duration = new AtomicLong();
         FinalStage finalStage = new FinalStage();
@@ -75,7 +81,9 @@ public class ContextMenuTest extends Application {
                         if (subItems.getText().equals(menuItem.getText())){
                             endTime.set(System.currentTimeMillis());
                             duration.set((endTime.get() - startTime));
-                            System.out.println("LinearMenu,"+ beforeBlock.getTrailRadialNumber() + ',' + target + "," + duration);
+                            resultLine = "LinearMenu,"+ beforeBlock.getTrailLinearNumber() + ',' + target + "," + duration;
+                            appendToFile(beforeBlock.getFilePath(),resultLine );
+                            System.out.println(resultLine);
                             beforeBlock.trailLinearNumber += 1;
                             if ((beforeBlock.getTrailRadialNumber() >= beforeBlock.getMaxTrailNum())&&
                                     (beforeBlock.getTrailLinearNumber() >= beforeBlock.maxTrailNum)){
@@ -91,7 +99,9 @@ public class ContextMenuTest extends Application {
                     if (item.getText().equals(menuItem.getText())){
                         endTime.set(System.currentTimeMillis());
                         duration.set((endTime.get() - startTime));
-                        System.out.println("LinearMenu,"+ beforeBlock.getTrailLinearNumber() + ',' + target + "," + duration);
+                        resultLine = "LinearMenu,"+ beforeBlock.getTrailLinearNumber() + ',' + target + "," + duration;
+                        appendToFile(beforeBlock.getFilePath(),resultLine );
+                        System.out.println(resultLine);
                         beforeBlock.trailLinearNumber += 1;
                         if ((beforeBlock.getTrailRadialNumber() >= beforeBlock.getMaxTrailNum())&&
                                 (beforeBlock.getTrailLinearNumber() >= beforeBlock.maxTrailNum)){
@@ -166,6 +176,15 @@ public class ContextMenuTest extends Application {
 
     public void setBeforeBlock(BeforeBlock beforeBlock) {
         this.beforeBlock = beforeBlock;
+    }
+
+    public static void appendToFile(String filePath, String textToAppend) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(textToAppend);
+            writer.newLine(); // Add newline after each appended string
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
