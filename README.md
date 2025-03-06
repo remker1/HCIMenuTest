@@ -1,7 +1,7 @@
 # CMPT481 Project
 
 # 1. To Set Up JavaFX:
-    a. Down load javafx from javafx
+    a. Download javafx from javafx
         website: https://openjfx.io/
     b. save it and extract it at a location you know
     c. Open IntelliJ, on the top right corner area, find configuration, Edit Configuration -> Plus Sign -> Application
